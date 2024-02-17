@@ -137,26 +137,30 @@ function InputBox({states = [[""]], setStateArray, setWordList, wordList = [[""]
   return (
     <div className = "inputStuff"> 
       <input onChange={typed} ref={barRef ? (inputElement: HTMLInputElement | null) => {if (inputElement) barRef.current = inputElement} : undefined} className="box" />
-      <div className = 'time'>0:{time}</div>
-      <div className = "wpm">
-        <span>{wpm} </span>
-        <span className='wpmtext'></span>
-        <span className='wpmtext'> WPM</span>
+      <div className = "InputUtilities">
+        <span className = "wpm">
+          <span>{wpm} </span>
+          <span className='wpmtext'>WPM</span>
+        </span>
+        <div className = "seperator"></div>
+        <span className = 'time'>0:{time}</span>
+        <div className = "seperator"></div>
+        <button onClick = {() => {
+          for (var i = 0 ; i < states.length; i++) {
+            (refs.current[i] as HTMLSpanElement).className = "wordBorder";
+          }
+          (barRef.current as HTMLInputElement).value = "";
+          upChar(0);
+          upWord(0);
+          upRunning(false)
+          upTime(finalTime)
+          upLast("");
+          reset(setStateArray, setWordList);
+          (barRef.current as HTMLInputElement).readOnly = false;
+          (barRef.current as HTMLInputElement).focus();
+        }} className='reset'><img src = {arrow} className = 'arrow'></img>
+        </button>
       </div>
-      <button onClick = {() => {
-        for (var i = 0 ; i < states.length; i++) {
-          (refs.current[i] as HTMLSpanElement).className = "wordBorder";
-        }
-        (barRef.current as HTMLInputElement).value = "";
-        upChar(0);
-        upWord(0);
-        upRunning(false)
-        upTime(finalTime)
-        upLast("");
-        reset(setStateArray, setWordList);
-        (barRef.current as HTMLInputElement).readOnly = false;
-        (barRef.current as HTMLInputElement).focus();
-      }} className='reset'><img src = {arrow} className = 'arrow'></img></button>
     </div>
   )
 }
@@ -223,7 +227,7 @@ export default function Test({fillerArr = [[""]], fillerWords = [[""]]}) {
   const [fillerwordList, setWordList] = useState(fillerWords);
   const refs = useRef<HTMLSpanElement[]>([]);
   return (
-    <div suppressHydrationWarning={true}>
+    <div className = "test">
       <div className = "textBorderOutline">
         <div className= 'textBorder'>
           <WordList wordList = {fillerwordList} states = {stateArray} refs = {refs} />
