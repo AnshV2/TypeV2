@@ -4,7 +4,10 @@
   --height: calc(var(--width) / 7.06);
 }
 
-
+a {
+  text-decoration: none;
+  color: black;
+}
 
 
 
@@ -37,9 +40,26 @@ body {
 }
 
 
+.user{
+  position:absolute;
+  left:63vw;
+  top:19vh;
+  --tw-text-opacity: 1;
+  color: white;
+  font-size: 1.5rem/* 24px */;
+  line-height: 2rem/* 32px */;
+  font-weight: 500;
+  text-decoration: none;
+}
 
-
-
+.signin{
+  --tw-text-opacity: 1;
+  color: white;
+  font-size: 1.5rem/* 24px */;
+  line-height: 2rem/* 32px */;
+  font-weight: 500;
+  text-decoration: none;
+}
 
 
 

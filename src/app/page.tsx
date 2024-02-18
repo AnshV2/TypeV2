@@ -6,12 +6,22 @@ import Link from "next/link";
 import { api } from "~/trpc/react";
 import styles from "./index.module.css";
 
+import {
+  ClerkProvider,
+  SignedIn,
+  SignedOut,
+  SignInButton,
+  UserButton,
+  SignIn, 
+  useUser,
+} from "@clerk/nextjs";
+
+
 import {simple} from './WordBank.js'
 const chigiri = '/chigiri.png'
 const arrow = '/arrow.png'
 
 import dynamic from 'next/dynamic'
- 
 const Test = dynamic(() => import("./_components/test"), { ssr: false })
 
 
@@ -54,8 +64,20 @@ export default function App() {
   fillerWordList = [];
   generate(fillerArr, fillerWordList)
 
+  const user = useUser()
+
   return (
     <div className = 'App' suppressHydrationWarning={true}>
+      <div className = "user">
+        <SignedIn>
+          {/* Mount the UserButton component */}
+          <div className = "signin">{user.user?.username}</div>
+        </SignedIn>
+        <SignedOut>
+          {/* Signed out users get sign in button */}
+          <Link href = "/signin"><div className = "signin"> Sign in </div></Link>
+        </SignedOut>
+      </div>
       <img src = {chigiri} className='chigiri'></img>
       <Test  fillerArr = {fillerArr} fillerWords = {fillerWordList} />
     </div>
