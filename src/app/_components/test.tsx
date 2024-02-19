@@ -242,6 +242,9 @@ export default function Test({fillerArr = [[""]], fillerWords = [[""]]}) {
       </div>
       <InputBox wordList = {fillerwordList} states = {stateArray} setStateArray = {setStateArray} setWordList={setWordList} refs = {refs}/>
       <div className="userService">
+        <div className = "session">
+
+        </div>
         <div className = "recentTest">
           <div className = "recentWPM">{testWPM} WPM</div>
           <div className = "recentCC">{testCC} CC</div>

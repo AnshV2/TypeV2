@@ -37,15 +37,27 @@ body {
 
 .chigiri{
   position:absolute;
-  left:38vw;
+  left:39vw;
   top:10vh;
   height:8.5vw;
 }
 
+.about{
+  position:absolute;
+  left:calc(calc(100vw - var(--width)) / 2 + 2vw);
+  top:17.5vh;
+  --tw-text-opacity: 1;
+  color: white;
+  font-size: 1.5rem/* 24px */;
+  line-height: 2rem/* 32px */;
+  font-weight: 500;
+  text-decoration: none;
+  color:white;
+}
 
 .user{
   position:absolute;
-  left:63vw;
+  right:calc(calc(100vw - var(--width)) / 2 + 2vw);
   top:17.5vh;
   --tw-text-opacity: 1;
   color: white;
@@ -272,11 +284,20 @@ body {
   background-color: var(--background);
 }
 
+.session{
+  width:30%;
+  height:100%;
+  position:relative;
+  background-color: var(--foreground);
+  border-style: solid;
+  border-color: var(--foreground);
+}
+
 .recentTest{
   width:30%;
   height:100%;
   position:relative;
-  left:33%;
+  left:4%;
   background-color: var(--foreground);
   border-style: solid;
   border-color: var(--foreground);
@@ -286,8 +307,10 @@ body {
   width:30%;
   height:100%;
   position:relative;
-  left:40%;
+  left:8%;
   background-color: var(--foreground);
+  border-style: solid;
+  border-color: var(--foreground);
 }
 
 .recentWPM{

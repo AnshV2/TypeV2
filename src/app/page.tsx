@@ -68,6 +68,7 @@ export default function App() {
 
   return (
     <div className = 'App' suppressHydrationWarning={true}>
+      <div className = "about">About</div>
       <div className = "user">
         <SignedIn>
           {/* Mount the UserButton component */}
