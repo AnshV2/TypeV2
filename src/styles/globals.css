@@ -2,6 +2,8 @@
   --blue: #1e90ff;
   --width: clamp(700px, 800px, 1000px);
   --height: calc(var(--width) / 7.06);
+  --background: #1C1E26;
+  --foreground: #232530;
 }
 
 a {
@@ -19,8 +21,8 @@ body {
 .App {
   display:flex;
   justify-content: center;
-  text-align: center;
-  background-color:#191919;
+  /*background-color:#191919; */
+  background-color: var(--background);
   height: 100vh;
   width:100vw;
 }
@@ -33,17 +35,16 @@ body {
 
 .chigiri{
   position:absolute;
-  left:40vw;
+  left:38vw;
   top:10vh;
   height:8.5vw;
-  width:21vw;
 }
 
 
 .user{
   position:absolute;
   left:63vw;
-  top:19vh;
+  top:17.5vh;
   --tw-text-opacity: 1;
   color: white;
   font-size: 1.5rem/* 24px */;
@@ -64,6 +65,8 @@ body {
 
 
 .test{
+  position:absolute;
+  top:35vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -85,13 +88,13 @@ body {
 }
 
 .CharWrong{
-  color: #e0829d;
+  color: #E9436F;
   font-size: calc(var(--width) / 30);
   white-space: pre;
 } 
 
 .CharCorrect{
-  color: #BED754;
+  color: #27D796;
   font-size: calc(var(--width) / 30);
   white-space: pre;
 }
@@ -107,8 +110,8 @@ body {
 
 .wordCurrent{
   z-index:3;
-  background-color: #353434;
-  border-color: #353434;
+  background-color: #2E303E;
+  border-color: var(--background);
   border-radius: 4px;
   padding:2px;
 }
@@ -123,7 +126,7 @@ body {
   border-radius: 7px;
   height: var(--height);
   width: var(--width);
-  background-color: #242323;
+  background-color: var(--foreground);;
   border:none;
   position:relative;
 }
@@ -135,7 +138,7 @@ body {
   width: calc(var(--width) / 1.07);
   top: calc(var(--height) / 4.9);
   left: calc(var(--width) / 30);
-  background-color: #242323;
+  background-color: var(--foreground);
   border:none;
   position:relative;
   overflow: hidden;
@@ -168,7 +171,7 @@ body {
   border-radius: 5px;
   height: 90%;
   width: 55%;
-  background-color: #242323;
+  background-color: var(--foreground);;
   border:none;
   display:block;
   color: white;
@@ -202,7 +205,7 @@ body {
   padding-left: 5%;
   padding-right: 5%;
   border-radius: 5px;
-  background-color: #242323;
+  background-color: var(--foreground);;
   border:none;
   text-align: center;
   align-items:center;
@@ -222,10 +225,10 @@ body {
   display:flex;
   padding-left: 5%;
   padding-right: 5%;
-  font-size: calc(var(--width) / 25);
+  font-size: calc(var(--width) / 28);
   border-radius: 5px;
   height: 100%;
-  background-color: #242323;
+  background-color: var(--foreground);;
   border:none;
   text-align: center;
   align-items:center;
@@ -237,7 +240,7 @@ body {
   vertical-align:top; /* Align button vertically */
   border-radius: 5px;
   height: 100%;
-  background-color: #242323;
+  background-color: var(--foreground);;
   border:none;
 }
 
