@@ -39,6 +39,7 @@ function InputBox({states = [[""]], setStateArray, setWordList, wordList = [[""]
       setTimeout(() => upTime(prev => prev - 1), 1000)
     }
     else if (time == 0 && running == true) {
+      //test finishes here
       upRunning(false)
       if (barRef.current != undefined) {barRef.current.readOnly = true}
       updateWpm()
@@ -226,6 +227,12 @@ export default function Test({fillerArr = [[""]], fillerWords = [[""]]}) {
   const [stateArray, setStateArray] = useState(fillerArr);
   const [fillerwordList, setWordList] = useState(fillerWords);
   const refs = useRef<HTMLSpanElement[]>([]);
+
+  const [testWPM, setTestWPM] = useState(0);
+  const [testCC, setTestCC] = useState(0);
+  const [testWC, setTestWC] = useState(0);
+  const [testAcc, setTestAcc] = useState(0);
+
   return (
     <div className = "test">
       <div className = "textBorderOutline">
@@ -234,6 +241,17 @@ export default function Test({fillerArr = [[""]], fillerWords = [[""]]}) {
         </div>
       </div>
       <InputBox wordList = {fillerwordList} states = {stateArray} setStateArray = {setStateArray} setWordList={setWordList} refs = {refs}/>
+      <div className="userService">
+        <div className = "recentTest">
+          <div className = "recentWPM">{testWPM} WPM</div>
+          <div className = "recentCC">{testCC} CC</div>
+          <div className = "recentWC">{testWC} WC</div>
+          <div className = "recentACC">{testAcc}% ACC</div>
+        </div>
+        <div className = "settings">
+
+        </div>
+      </div>
     </div>
   );
 }
