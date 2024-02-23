@@ -7,8 +7,11 @@ const chigiri = '/chigiri.png'
 const arrow = '/arrow.png'
 import React, { useState , useEffect, useRef} from "react"
 
-function InputBox({states = [[""]], setStateArray, setWordList, wordList = [[""]], refs = useRef<HTMLSpanElement[]>([])}: {
-  states: string[][], setStateArray: React.Dispatch<React.SetStateAction<string[][]>>, setWordList: React.Dispatch<React.SetStateAction<string[][]>>, wordList: string[][], refs:React.MutableRefObject<HTMLSpanElement[]>
+
+function InputBox({states = [[""]], setStateArray, setWordList, wordList = [[""]], refs = useRef<HTMLSpanElement[]>([]), setTestWPM, setTestCC, setTestWC, setTestAcc}: {
+  states: string[][], setStateArray: React.Dispatch<React.SetStateAction<string[][]>>, setWordList: React.Dispatch<React.SetStateAction<string[][]>>, wordList: string[][], 
+  refs:React.MutableRefObject<HTMLSpanElement[]>, setTestWPM: React.Dispatch<React.SetStateAction<number>>, setTestCC: React.Dispatch<React.SetStateAction<number>>, 
+  setTestWC: React.Dispatch<React.SetStateAction<number>>, setTestAcc: React.Dispatch<React.SetStateAction<number>>,
 }) {
   const [word, upWord] = useState(0);
   const [char, upChar] = useState(0);
@@ -20,17 +23,37 @@ function InputBox({states = [[""]], setStateArray, setWordList, wordList = [[""]
   var barRef = useRef<HTMLInputElement>();
 
   function updateWpm() {
-    var filler = 0;
+    var fillerCor = 0;
+    var fillerIncor = 0;
     for (var i = 0; i < states.length; i++) {
       let stateHolder = states[i]?? "";
       for (var j = 0; j < stateHolder.length; j++) {
         if (stateHolder[j] === "CharCorrect") {
-          filler++;
+          fillerCor++;
+        }
+        else if(stateHolder[j] === "CharIncorrect") {
+          fillerIncor++;
         }
       }
     }
-    filler += word;
-    upWpm(Math.round(filler / 5 / ((finalTime - time) / 60)))
+    upWpm(Math.round(fillerCor / 5 / ((finalTime - time) / 60)))
+  }
+
+  function getWPM() {
+    var fillerCor = 0;
+    var fillerIncor = 0;
+    for (var i = 0; i < states.length; i++) {
+      let stateHolder = states[i]?? "";
+      for (var j = 0; j < stateHolder.length; j++) {
+        if (stateHolder[j] === "CharCorrect") {
+          fillerCor++;
+        }
+        else if(stateHolder[j] === "CharWrong") {
+          fillerIncor++;
+        }
+      }
+    }
+    return ({cor: fillerCor, incor: fillerIncor, WPM: Math.round(fillerCor / 5 / ((finalTime - time) / 60))})
   }
 
   useEffect(() => {
@@ -39,10 +62,16 @@ function InputBox({states = [[""]], setStateArray, setWordList, wordList = [[""]
       setTimeout(() => upTime(prev => prev - 1), 1000)
     }
     else if (time == 0 && running == true) {
-      //test finishes here
       upRunning(false)
       if (barRef.current != undefined) {barRef.current.readOnly = true}
       updateWpm()
+      let stats = getWPM()
+      setTestCC(stats.cor)
+      setTestWC(stats.incor)
+      setTestWPM(stats.WPM)
+      let acc = Math.round(stats.cor / (stats.cor + stats.incor) * 100)
+      console.log(acc)
+      setTestAcc(acc)
     }
     else if (running == false) {
       upTime(finalTime)
@@ -240,7 +269,8 @@ export default function Test({fillerArr = [[""]], fillerWords = [[""]]}) {
           <WordList wordList = {fillerwordList} states = {stateArray} refs = {refs} />
         </div>
       </div>
-      <InputBox wordList = {fillerwordList} states = {stateArray} setStateArray = {setStateArray} setWordList={setWordList} refs = {refs}/>
+      <InputBox wordList = {fillerwordList} states = {stateArray} setStateArray = {setStateArray} setWordList={setWordList} refs = {refs} setTestWPM = {setTestWPM} 
+                setTestAcc={setTestAcc} setTestCC={setTestCC} setTestWC={setTestWC}/>
       <div className="userService">
         <div className = "session">
 

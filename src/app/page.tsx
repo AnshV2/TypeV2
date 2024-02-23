@@ -3,6 +3,8 @@
 import { unstable_noStore as noStore } from "next/cache";
 import Link from "next/link";
 
+import { useRouter } from 'next/navigation'
+
 import { api } from "~/trpc/react";
 import styles from "./index.module.css";
 
@@ -57,6 +59,7 @@ function generate(fillerArr: string[][], fillerwords: string[][]) {
 
 export default function App() {
   noStore();
+  const router = useRouter()
 
   var fillerArr: string[][];
   fillerArr = [];
@@ -72,7 +75,7 @@ export default function App() {
       <div className = "user">
         <SignedIn>
           {/* Mount the UserButton component */}
-          <div className = "signin">{user.user?.username}</div>
+          <div className = "signin" onClick={() => router.push('/profile')}>{user.user?.username}</div>
         </SignedIn>
         <SignedOut>
           {/* Signed out users get sign in button */}
