@@ -25,3 +25,11 @@ model Champs {
   @@index([name])
 }
 
+model Test{
+  user String
+  wpm Int
+  cc Int
+  wc Int
+  time DateTime @default(now())
+  @@unique([user, time])
+}

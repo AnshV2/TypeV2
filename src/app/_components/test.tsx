@@ -6,6 +6,10 @@ import {simple} from '../WordBank.js'
 const chigiri = '/chigiri.png'
 const arrow = '/arrow.png'
 import React, { useState , useEffect, useRef} from "react"
+import { api } from "~/trpc/react";
+import {
+  useUser,
+} from "@clerk/nextjs";
 
 
 function InputBox({states = [[""]], setStateArray, setWordList, wordList = [[""]], refs = useRef<HTMLSpanElement[]>([]), setTestWPM, setTestCC, setTestWC, setTestAcc}: {
@@ -21,6 +25,8 @@ function InputBox({states = [[""]], setStateArray, setWordList, wordList = [[""]
   const[running, upRunning] = useState(false)
   const[wpm, upWpm] = useState(0);
   var barRef = useRef<HTMLInputElement>();
+  const user = useUser()
+  const func = api.post.postTest.useMutation().mutate;
 
   function updateWpm() {
     var fillerCor = 0;
@@ -62,6 +68,7 @@ function InputBox({states = [[""]], setStateArray, setWordList, wordList = [[""]
       setTimeout(() => upTime(prev => prev - 1), 1000)
     }
     else if (time == 0 && running == true) {
+      //where test ends
       upRunning(false)
       if (barRef.current != undefined) {barRef.current.readOnly = true}
       updateWpm()
@@ -72,6 +79,9 @@ function InputBox({states = [[""]], setStateArray, setWordList, wordList = [[""]
       let acc = Math.round(stats.cor / (stats.cor + stats.incor) * 100)
       console.log(acc)
       setTestAcc(acc)
+      if (user.isSignedIn && user.user?.id != undefined) {
+        func({user: user.user.id , wpm: stats.WPM, wc: stats.incor, cc: stats.cor})
+      }
     }
     else if (running == false) {
       upTime(finalTime)
