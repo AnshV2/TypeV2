@@ -49,6 +49,15 @@ export default function Signin() {
           <div className="typeFour">WC</div>
           <div className="typeFive">DATE</div>
         </div>
+        {test?.map((e) => {return (
+          <div className="testRow">
+          <div className="typeFiller">{e.wpm} wpm</div>
+          <div className="typeFillerTwo"> {Math.round(e.cc / (e.cc + e.wc) * 100)}%</div>
+          <div className="typeFiller"> {e.cc}</div>
+          <div className="typeFillerTwo"> {e.wc}</div>
+          <div className="typeFiller"> {e.time.getFullYear()} - {e.time.getMonth()} - {e.time.getDay()}</div>
+        </div>
+        )})}
       </div>
     </>
   );
