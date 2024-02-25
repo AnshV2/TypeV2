@@ -432,8 +432,8 @@ body {
   width: 40vw;
   height:64vh;
   position:absolute;
-  left: 23vw;
-  top:22vh;
+  left: 26vw;
+  top:20vh;
 }
 
 .firstRow{
@@ -550,4 +550,65 @@ body {
   color: #e6bafa;
   justify-content: center;
   align-items: center; 
+}
+
+.pbTest{
+  width:15vw;
+  height:30vh;
+  position:absolute;
+  top:40vh;
+  left:73vw;
+  background-color: var(--foreground);
+  border-style: solid;
+  border-color: var(--foreground);
+}
+
+.pb{
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 5vh;
+  width: 15vw;
+  height:10vh;
+  position:absolute;
+  top:30vh;
+  left:73vw;
+  color:white;
+}
+
+.profileContainer{
+  display:flex;
+  flex-direction: row;
+  position:absolute;
+  top: 7vh;
+  left: 7vw;
+  height: 8vh;
+}
+
+.username{
+  height:100%;
+  color:white;
+  font-size: 7vh;
+  font-weight: bold;
+}
+
+.testRoute{
+  display: flex;
+  height:100%;
+  align-items: end;
+  color: white;
+  font-size: 5vh;
+  font-weight:bold;
+  position:absolute;
+  left: 19vw;
+}
+
+.about2{
+  color: white;
+  font-size: 5vh;
+  font-weight:bold;
+  position:absolute;
+  top: 8.8vh;
+  left: 34.5vw;
 }

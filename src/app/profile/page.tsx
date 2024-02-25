@@ -26,19 +26,46 @@ const SignOutButton = () => {
 export default function Signin() {
   const user = useUser()
   const test = api.post.getTest.useQuery({user: user.user?.id?? ""}).data
+
+  let bestTest = {wpm: 0, cc: 0, wc: 0}
+  let avgWPM = 0
+  let avgACC = 0
+  let testCount = 0
+
+  if (test) {
+    let index = 0;
+    testCount = test?.length
+    for (let i = 0; i < test?.length; i++){
+      const one = test[i]?.wpm
+      const two = test[index]?.wpm
+      const cc = test[i]?.cc
+      const wc = test[i]?.wc
+      avgACC += Math.round(cc??0 / (cc??0 + (wc??0)) * 100)
+      avgWPM += one?? 0;
+      if (one && two) {
+        if ( one > two) {
+          index = i
+        }
+      }
+    }
+    avgWPM = Math.round(avgWPM / testCount);
+    avgACC = Math.round(avgACC / testCount);
+    bestTest = test[index]?? {wpm: 0, cc: 0, wc: 0}
+  }
+
   return (
     <>
-      <SignOutButton />
+      
       <div className="userAVGWPM">
-        <div className="userAVGWPMText">12 WPM</div>
+        <div className="userAVGWPMText">{avgWPM} WPM</div>
         <div>Average test wpm</div>
       </div>
       <div className="userAVGACC">
-        <div className="userAVGWPMText">12%</div>
+        <div className="userAVGWPMText">{avgACC}%</div>
         <div>Average test accuracy</div>
       </div>
       <div className="userCount">
-        <div className="userAVGWPMText">12</div>
+        <div className="userAVGWPMText">{testCount}</div>
         <div>Number of Tests Taken</div>
       </div>
       <div className="tests">
@@ -59,6 +86,20 @@ export default function Signin() {
         </div>
         )})}
       </div>
+      <div className="pb">Personal Best</div>
+      <div className = "pbTest">
+        <div className = "recentWPM">{bestTest.wpm} WPM</div>
+        <div className = "recentCC">{bestTest.cc} CC</div>
+        <div className = "recentWC">{bestTest.wc} WC</div>
+        <div className = "recentACC">{Math.round(bestTest.cc / (bestTest.cc + bestTest.wc) * 100)}% ACC</div>
+      </div>
+
+      <div className="profileContainer">
+        <div className="username">{user.user?.username}</div>
+        <div className="testRoute">Test</div>
+      </div>
+
+      <div className="about2">About</div>
     </>
   );
 }
