@@ -48,7 +48,7 @@ body {
 .about{
   position:absolute;
   left:calc(calc(100vw - var(--width)) / 2 + 2vw);
-  top:17.5vh;
+  top:15.5vh;
   --tw-text-opacity: 1;
   color: white;
   font-size: 1.5rem/* 24px */;
@@ -56,18 +56,42 @@ body {
   font-weight: 500;
   text-decoration: none;
   color:white;
+  border:solid;
+  border-color:rgba(255, 255, 255, 0.562);
+  border-width: 2px;
+  border-radius: 5px;
+  padding:5px;
+  padding-left:7px;
+  padding-right:7px;
+}
+
+.about:hover{
+  background-color:#435585;
+  cursor:pointer;
 }
 
 .user{
   position:absolute;
   right:calc(calc(100vw - var(--width)) / 2 + 2vw);
-  top:17.5vh;
+  top:15.5vh;
   --tw-text-opacity: 1;
   color: white;
   font-size: 1.5rem/* 24px */;
   line-height: 2rem/* 32px */;
   font-weight: 500;
   text-decoration: none;
+  border:solid;
+  border-color:rgba(255, 255, 255, 0.562);
+  border-width: 2px;
+  border-radius: 5px;
+  padding:5px;
+  padding-left:7px;
+  padding-right:7px;
+}
+
+.user:hover{
+  background-color:#435585;
+  cursor:pointer;
 }
 
 .signin{
@@ -434,6 +458,7 @@ body {
   position:absolute;
   left: 26vw;
   top:20vh;
+  overflow-y: auto;
 }
 
 .firstRow{
@@ -533,6 +558,7 @@ body {
   font-size: 1vw;
   font-weight: bold;
   color:#e6bafa;
+  opacity: 75%;
   justify-content: center;
   align-items: center; 
 }
@@ -548,6 +574,7 @@ body {
   font-size: 1vw;
   font-weight: bold;
   color: #e6bafa;
+  opacity: 75%;
   justify-content: center;
   align-items: center; 
 }
@@ -578,12 +605,14 @@ body {
 }
 
 .profileContainer{
+  align-items: baseline;
   display:flex;
   flex-direction: row;
   position:absolute;
-  top: 7vh;
+  top: 8vh;
   left: 7vw;
   height: 8vh;
+  width: 58.5vw;
 }
 
 .username{
@@ -594,21 +623,63 @@ body {
 }
 
 .testRoute{
+  border:solid;
+  border-color:rgba(255, 255, 255, 0.562);
+  border-width: 2px;
+  height:4.5vh;
+  padding:7px;
+  border-radius: 6px;
+  background-color:var(--background);
+  margin-left: auto;
   display: flex;
-  height:100%;
   align-items: end;
   color: white;
-  font-size: 5vh;
+  font-size: 3.5vh;
   font-weight:bold;
-  position:absolute;
-  left: 19vw;
+}
+
+.testRoute:hover{
+  background-color:#435585;
+  cursor:pointer;
 }
 
 .about2{
+  border:solid;
+  border-color:rgba(255, 255, 255, 0.562);
+  border-width: 2px;
+  height:4.5vh;
+  padding:6px;
+  border-radius: 7px;
+  background-color:var(--background);
+  margin-left: 3vw;
+  display: flex;
   color: white;
-  font-size: 5vh;
+  font-size: 3.5vh;
   font-weight:bold;
-  position:absolute;
-  top: 8.8vh;
-  left: 34.5vw;
+  align-items: end;
+}
+
+.about2:hover{
+  background-color:#435585;
+  cursor:pointer;
+}
+
+.signOut{
+  border:solid;
+  border-color:rgba(255, 255, 255, 0.562);
+  border-width: 2px;
+  height:4.5vh;
+  padding:7px;
+  border-radius: 6px;
+  background-color:var(--background);
+  margin-left: 3vw;
+  display: flex;
+  color: white;
+  font-size: 3.5vh;
+  font-weight:bold;
+  align-items: end;
+}
+.signOut:hover{
+  background-color:#435585;
+  cursor:pointer;
 }

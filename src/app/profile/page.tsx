@@ -97,9 +97,9 @@ export default function Signin() {
       <div className="profileContainer">
         <div className="username">{user.user?.username}</div>
         <div className="testRoute">Test</div>
+        <div className="about2">About</div>
+        <div className="signOut">Log Out</div>
       </div>
-
-      <div className="about2">About</div>
     </>
   );
 }
