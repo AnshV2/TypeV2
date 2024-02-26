@@ -7,18 +7,8 @@ import { api } from "~/trpc/react";
 import {
   useUser,
 } from "@clerk/nextjs";
- 
-const SignOutButton = () => {
-  const { signOut } = useClerk();
-  const router = useRouter()
- 
-  return (
-    // Clicking on this button will sign out a user and reroute them to the "/" (home) page.
-    <button onClick={() => signOut(() => router.push("/"))}>
-      Sign out
-    </button>
-  );
-};
+import Link from "next/link"; 
+
 
 
 
@@ -26,6 +16,8 @@ const SignOutButton = () => {
 export default function Signin() {
   const user = useUser()
   const test = api.post.getTest.useQuery({user: user.user?.id?? ""}).data
+  const router = useRouter()
+  const { signOut } = useClerk();
 
   let bestTest = {wpm: 0, cc: 0, wc: 0}
   let avgWPM = 0
@@ -96,9 +88,9 @@ export default function Signin() {
 
       <div className="profileContainer">
         <div className="username">{user.user?.username}</div>
-        <div className="testRoute">Test</div>
+        <div className="testRoute" onClick={() => router.push('/')}>Test</div>
         <div className="about2">About</div>
-        <div className="signOut">Log Out</div>
+        <div className="signOut" onClick={() => signOut(() => router.push("/"))}>Log Out</div>
       </div>
     </>
   );
