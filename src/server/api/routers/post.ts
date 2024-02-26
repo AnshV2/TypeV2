@@ -28,7 +28,7 @@ export const postRouter = createTRPCRouter({
     .input(z.object({user: z.string()}))
     .query(async ({ctx, input}) => {
       const tests = (await ctx.db.test.findMany({orderBy: [{
-        time: 'desc'
+        time: 'asc'
       }], 
       take: 100,
       where: {user: {equals: input.user}}}))

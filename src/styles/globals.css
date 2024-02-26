@@ -175,7 +175,7 @@ body {
 .textBorder {
   display: flex;
   flex-wrap: wrap;
-  height: calc(var(--height) / 1.6);
+  height: calc(var(--height) / 1.4);
   width: calc(var(--width) / 1.07);
   top: calc(var(--height) / 4.9);
   left: calc(var(--width) / 30);
