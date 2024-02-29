@@ -176,7 +176,9 @@ function InputBox({states = [[""]], setStateArray, setWordList, wordList = [[""]
   }, [])
   return (
     <div className = "inputStuff"> 
-      <input onChange={typed} ref={barRef.current ? (inputElement: HTMLInputElement | null) => {if (inputElement) barRef.current = inputElement} : undefined} className="box" />
+      <input onChange={typed} ref={barRef.current ? (barRef as React.LegacyRef<HTMLInputElement>) : undefined} className="box" />
+
+
       <div className = "InputUtilities">
         <span className = "wpm">
           <span>{wpm} </span>
@@ -252,10 +254,8 @@ function generate(fillerArr: string[][], fillerwords: string[][]) {
 }
 
 function reset(setStateArray: Function, setWordList: Function) {
-  let fillerArr: string[][];
-  fillerArr = [];
-  let fillerWords: string[][];
-  fillerWords = []
+  const fillerArr: string[][] = [];
+  const fillerWords: string[][] = [];
   generate(fillerArr, fillerWords)
   setStateArray(fillerArr);
   setWordList(fillerWords);
