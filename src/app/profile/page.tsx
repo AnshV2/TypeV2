@@ -88,7 +88,7 @@ export default function Signin() {
       </div>
 
       <div className="profileContainer">
-        <div className="username">{user.user?.username}</div>
+        <div className="username">{user.user?.firstName}</div>
         <div className="testRoute" onClick={() => router.push('/')}>Test</div>
         <div className="about2">About</div>
         <div className="signOut" onClick={() => signOut(() => router.push("/"))}>Log Out</div>

@@ -72,7 +72,9 @@ export default function App() {
       <div className = "user">
         <SignedIn>
           {/* Mount the UserButton component */}
-          <div className = "signin" onClick={() => router.push('/profile')}>{user.user?.username}</div>
+          <div className = "signin" onClick={() => {
+            router.push('/profile')
+          }}>Profile</div>
         </SignedIn>
         <SignedOut>
           {/* Signed out users get sign in button */}
