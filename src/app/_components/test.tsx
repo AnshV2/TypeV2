@@ -213,7 +213,7 @@ function Char({word = "", state = ""}) {
 }
 
 function Word({word = [""], states = [""]}) {
-  const newList = word.map((item, index) => <Char key = {uuidv4()} word = {item} state = {states[index]} />)
+  const newList = word.map((item, index) => <Char key = "index" word = {item} state = {states[index]} />)
   return newList;
 }
 
@@ -222,7 +222,7 @@ function WordList({wordList = [[""]], states = [[""]], refs}: {
   wordList: string[][], states: string[][], refs:React.MutableRefObject<HTMLSpanElement[]>
 }) {
   const refHolder:(HTMLSpanElement | null)[] = refs.current;
-  const newList = wordList.map((item, index) => <span key = {uuidv4()} className='wordBorder' ref = {el => refHolder[index] = el} ><Word word = {item} states = {states[index]}/></span>)
+  const newList = wordList.map((item, index) => <span className='wordBorder' key = {index} ref = {el => refHolder[index] = el} ><Word word = {item} states = {states[index]}/></span>)
   return newList;
 }
 
