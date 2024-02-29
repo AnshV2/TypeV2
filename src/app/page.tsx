@@ -28,27 +28,27 @@ const Test = dynamic(() => import("./_components/test"), { ssr: false })
 
 
 function generate(fillerArr: string[][], fillerwords: string[][]) {
-  var wordList: string[];
+  let wordList: string[];
   wordList = []
   fillerArr.length = 0;
   fillerwords.length = 0;
   for (let i = 0; i < 150; i++) {
-    var rand = Math.random();
+    let rand = Math.random();
     rand = Math.floor(rand * 1000);
     wordList.push(simple[rand] + " ")
   }
   for (let i = 0; i < wordList.length; i++) {
-    var filler = [];
+    let filler = [];
     let word = wordList[i]?? ""
     for (let j = 0; j < word.length; j++) {
       filler.push("CharStart");
     }
     fillerArr.push(filler);
   }
-  for (var i = 0; i < wordList.length; i++) {
-    var fillerWordsTwo = []
+  for (let i = 0; i < wordList.length; i++) {
+    let fillerWordsTwo = []
     let word = wordList[i]?? ""
-    for (var j = 0; j < word.length; j++) {
+    for (let j = 0; j < word.length; j++) {
       let char = word[j] ?? ""
       fillerWordsTwo.push(char)
     }
@@ -61,9 +61,9 @@ export default function App() {
   noStore();
   const router = useRouter()
 
-  var fillerArr: string[][];
+  let fillerArr: string[][];
   fillerArr = [];
-  var fillerWordList : string[][];
+  let fillerWordList : string[][];
   fillerWordList = [];
   generate(fillerArr, fillerWordList)
 

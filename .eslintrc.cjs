@@ -26,6 +26,7 @@ const config = {
     "@typescript-eslint/no-var-requires": "off", 
     "@typescript-eslint/prefer-optional-chain": "off",
     "@typescript-eslint/prefer-for-of": "off",
+    "@typescript-eslint/non-nullable-type-assertion-style": "off",
   },
 };
 

@@ -24,16 +24,16 @@ function InputBox({states = [[""]], setStateArray, setWordList, wordList = [[""]
   const finalTime = 30;
   const[running, upRunning] = useState(false)
   const[wpm, upWpm] = useState(0);
-  var barRef = useRef<HTMLInputElement>();
+  let barRef = useRef<HTMLInputElement>();
   const user = useUser()
   const func = api.post.postTest.useMutation().mutate;
 
   function updateWpm() {
-    var fillerCor = 0;
-    var fillerIncor = 0;
-    for (var i = 0; i < states.length; i++) {
+    let fillerCor = 0;
+    let fillerIncor = 0;
+    for (let i = 0; i < states.length; i++) {
       let stateHolder = states[i]?? "";
-      for (var j = 0; j < stateHolder.length; j++) {
+      for (let j = 0; j < stateHolder.length; j++) {
         if (stateHolder[j] === "CharCorrect") {
           fillerCor++;
         }
@@ -46,11 +46,11 @@ function InputBox({states = [[""]], setStateArray, setWordList, wordList = [[""]
   }
 
   function getWPM() {
-    var fillerCor = 0;
-    var fillerIncor = 0;
-    for (var i = 0; i < states.length; i++) {
+    let fillerCor = 0;
+    let fillerIncor = 0;
+    for (let i = 0; i < states.length; i++) {
       let stateHolder = states[i]?? "";
-      for (var j = 0; j < stateHolder.length; j++) {
+      for (let j = 0; j < stateHolder.length; j++) {
         if (stateHolder[j] === "CharCorrect") {
           fillerCor++;
         }
@@ -102,10 +102,10 @@ function InputBox({states = [[""]], setStateArray, setWordList, wordList = [[""]
   }
 
   function typed(event: { target: { value: string | any[]; }; }) {
-    var fillthing = "";
-    for (var i = 0; i < wordList.length; i++) {
+    let fillthing = "";
+    for (let i = 0; i < wordList.length; i++) {
       let wordListHolder = wordList[i]?? [];
-      for (var j = 0; j < wordListHolder.length; j++) {
+      for (let j = 0; j < wordListHolder.length; j++) {
         fillthing += (wordListHolder[j]);
       }
     }
@@ -113,7 +113,7 @@ function InputBox({states = [[""]], setStateArray, setWordList, wordList = [[""]
       setTimeout(() => upTime(prev => prev - 1), 1000)
       upRunning(true)
     }
-    var letter = (event.target.value[event.target.value.length - 1]);
+    let letter = (event.target.value[event.target.value.length - 1]);
     if (letter == " ") {
       if (event.target.value.length == 1) {
         event.target.value = "";
@@ -122,21 +122,21 @@ function InputBox({states = [[""]], setStateArray, setWordList, wordList = [[""]
         console.log(event.target.value.length);
         (refs.current[word] as HTMLSpanElement).className = "wordBorder";
         
-        var check = true;
-        for (var i = 0; i < event.target.value.length - 1; i++) {
+        let check = true;
+        for (let i = 0; i < event.target.value.length - 1; i++) {
           if (event.target.value[i] != (wordList[word]?? [])[i]) {
             check = false;
           }
         }
         if (event.target.value.length != (wordList[word]?? []).length) {check = false;}
         if (check === true) {
-          for (var i = 0; i < (wordList[word]?? []).length; i++) {updateState(word, i, "CharCorrect")}
+          for (let i = 0; i < (wordList[word]?? []).length; i++) {updateState(word, i, "CharCorrect")}
         }
         else {
-          for (var i = 0; i < (wordList[word]?? "").length; i++) {updateState(word, i, "CharWrong")}
+          for (let i = 0; i < (wordList[word]?? "").length; i++) {updateState(word, i, "CharWrong")}
         }
         if ((refs.current[word] as HTMLSpanElement).getBoundingClientRect().top != (refs.current[word + 1] as HTMLSpanElement).getBoundingClientRect().top) {
-          for (var i = 0 ; i < states.length; i++) {
+          for (let i = 0 ; i < states.length; i++) {
             if ((refs.current[i] as HTMLSpanElement).getBoundingClientRect().top <= (refs.current[word] as HTMLSpanElement).getBoundingClientRect().top) {
               (refs.current[i] as HTMLSpanElement).className = "wordDisappear"
             }
@@ -151,20 +151,20 @@ function InputBox({states = [[""]], setStateArray, setWordList, wordList = [[""]
     }
     else {
       if (event.target.value.length > (wordList[word]?? "").length) {
-        for (var i = 0; i < (wordList[word]?? "").length; i++) {updateState(word, i, "CharWrong")}
+        for (let i = 0; i < (wordList[word]?? "").length; i++) {updateState(word, i, "CharWrong")}
       }
       else {
-        var check = true;
-        for (var i = 0; i < event.target.value.length; i++) {
+        let check = true;
+        for (let i = 0; i < event.target.value.length; i++) {
           if (event.target.value[i] != (wordList[word]?? "")[i]) {
             check = false;
           }
         }
         if (check === false) {
-          for (var i = 0; i < (wordList[word]?? "").length; i++) {updateState(word, i, "CharWrong")}
+          for (let i = 0; i < (wordList[word]?? "").length; i++) {updateState(word, i, "CharWrong")}
         }
         else {
-          for (var i = 0; i < (wordList[word]?? "").length; i++) {updateState(word, i, "CharStart")}
+          for (let i = 0; i < (wordList[word]?? "").length; i++) {updateState(word, i, "CharStart")}
         }
       }
     }
@@ -186,7 +186,7 @@ function InputBox({states = [[""]], setStateArray, setWordList, wordList = [[""]
         <span className = 'time'>0:{time}</span>
         <div className = "seperator"></div>
         <button onClick = {() => {
-          for (var i = 0 ; i < states.length; i++) {
+          for (let i = 0 ; i < states.length; i++) {
             (refs.current[i] as HTMLSpanElement).className = "wordBorder";
           }
           (barRef.current as HTMLInputElement).value = "";
@@ -224,27 +224,27 @@ function WordList({wordList = [[""]], states = [[""]], refs = useRef<HTMLSpanEle
 
 
 function generate(fillerArr: string[][], fillerwords: string[][]) {
-  var wordList: string[];
+  let wordList: string[];
   wordList = []
   fillerArr.length = 0;
   fillerwords.length = 0;
   for (let i = 0; i < 150; i++) {
-    var rand = Math.random();
+    let rand = Math.random();
     rand = Math.floor(rand * 1000);
     wordList.push(simple[rand] + " ")
   }
   for (let i = 0; i < wordList.length; i++) {
-    var filler = [];
+    let filler = [];
     let word = wordList[i]?? ""
     for (let j = 0; j < word.length; j++) {
       filler.push("CharStart");
     }
     fillerArr.push(filler);
   }
-  for (var i = 0; i < wordList.length; i++) {
-    var fillerWordsTwo = []
+  for (let i = 0; i < wordList.length; i++) {
+    let fillerWordsTwo = []
     let word = wordList[i]?? ""
-    for (var j = 0; j < word.length; j++) {
+    for (let j = 0; j < word.length; j++) {
       let char = word[j] ?? ""
       fillerWordsTwo.push(char)
     }
@@ -253,9 +253,9 @@ function generate(fillerArr: string[][], fillerwords: string[][]) {
 }
 
 function reset(setStateArray: Function, setWordList: Function) {
-  var fillerArr: string[][];
+  let fillerArr: string[][];
   fillerArr = [];
-  var fillerWords: string[][];
+  let fillerWords: string[][];
   fillerWords = []
   generate(fillerArr, fillerWords)
   setStateArray(fillerArr);
