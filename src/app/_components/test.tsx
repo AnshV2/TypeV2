@@ -79,7 +79,6 @@ function InputBox({states = [[""]], setStateArray, setWordList, wordList = [[""]
       setTestWC(stats.incor)
       setTestWPM(stats.WPM)
       const acc = Math.round(stats.cor / (stats.cor + stats.incor) * 100)
-      console.log(acc)
       setTestAcc(acc)
       if (user.isSignedIn && user.user?.id != undefined) {
         func({user: user.user.id , wpm: stats.WPM, wc: stats.incor, cc: stats.cor})
@@ -121,7 +120,6 @@ function InputBox({states = [[""]], setStateArray, setWordList, wordList = [[""]
         event.target.value = "";
       }
       else {
-        console.log(event.target.value.length);
         (refs.current[word] as HTMLSpanElement).className = "wordBorder";
         
         let check = true;
@@ -213,7 +211,7 @@ function Char({word = "", state = ""}) {
 }
 
 function Word({word = [""], states = [""]}) {
-  const newList = word.map((item, index) => <Char key = "index" word = {item} state = {states[index]} />)
+  const newList = word.map((item, index) => <Char key = {index} word = {item} state = {states[index]} />)
   return newList;
 }
 
