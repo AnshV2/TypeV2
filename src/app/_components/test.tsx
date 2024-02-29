@@ -24,7 +24,7 @@ function InputBox({states = [[""]], setStateArray, setWordList, wordList = [[""]
   const finalTime = 30;
   const[running, upRunning] = useState(false)
   const[wpm, upWpm] = useState(0);
-  const barRef = useRef<HTMLInputElement>();
+  const barRef = useRef<HTMLInputElement>(null);
   const user = useUser()
   const func = api.post.postTest.useMutation().mutate;
 
@@ -176,8 +176,7 @@ function InputBox({states = [[""]], setStateArray, setWordList, wordList = [[""]
   }, [])
   return (
     <div className = "inputStuff"> 
-      <input onChange={typed} ref={barRef.current ? (barRef as React.LegacyRef<HTMLInputElement>) : undefined} className="box" />
-
+      <input onChange={typed} ref={barRef} className="box" />
 
       <div className = "InputUtilities">
         <span className = "wpm">
