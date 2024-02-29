@@ -176,7 +176,7 @@ function InputBox({states = [[""]], setStateArray, setWordList, wordList = [[""]
   }, [])
   return (
     <div className = "inputStuff"> 
-      <input onChange={typed} ref={barRef ? (inputElement: HTMLInputElement | null) => {if (inputElement) barRef.current = inputElement} : undefined} className="box" />
+      <input onChange={typed} ref={barRef.current ? (inputElement: HTMLInputElement | null) => {if (inputElement) barRef.current = inputElement} : undefined} className="box" />
       <div className = "InputUtilities">
         <span className = "wpm">
           <span>{wpm} </span>

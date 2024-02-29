@@ -27,6 +27,8 @@ const config = {
     "@typescript-eslint/prefer-optional-chain": "off",
     "@typescript-eslint/prefer-for-of": "off",
     "@typescript-eslint/non-nullable-type-assertion-style": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-unsafe-return": "off",
   },
 };
 
