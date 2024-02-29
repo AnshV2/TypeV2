@@ -29,6 +29,7 @@ const config = {
     "@typescript-eslint/non-nullable-type-assertion-style": "off",
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/no-unsafe-return": "off",
+    "@typescript-eslint/ban-types": "off",
   },
 };
 

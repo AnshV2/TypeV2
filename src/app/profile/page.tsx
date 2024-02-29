@@ -8,7 +8,8 @@ import {
   useUser,
 } from "@clerk/nextjs";
 import Link from "next/link"; 
-
+import { v4 as uuidv4 } from 'uuid';
+uuidv4();
 
 
 
@@ -69,7 +70,7 @@ export default function Signin() {
           <div className="typeFive">DATE</div>
         </div>
         {test?.map((e) => {return (
-          <div className="testRow">
+        <div className="testRow" key = {uuidv4()}>
           <div className="typeFiller">{e.wpm} wpm</div>
           <div className="typeFillerTwo"> {Math.round(e.cc / (e.cc + e.wc) * 100)}%</div>
           <div className="typeFiller"> {e.cc}</div>

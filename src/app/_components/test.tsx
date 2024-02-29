@@ -10,9 +10,11 @@ import { api } from "~/trpc/react";
 import {
   useUser,
 } from "@clerk/nextjs";
+import { v4 as uuidv4 } from 'uuid';
+uuidv4();
 
 
-function InputBox({states = [[""]], setStateArray, setWordList, wordList = [[""]], refs = useRef<HTMLSpanElement[]>([]), setTestWPM, setTestCC, setTestWC, setTestAcc}: {
+function InputBox({states = [[""]], setStateArray, setWordList, wordList = [[""]], refs, setTestWPM, setTestCC, setTestWC, setTestAcc}: {
   states: string[][], setStateArray: React.Dispatch<React.SetStateAction<string[][]>>, setWordList: React.Dispatch<React.SetStateAction<string[][]>>, wordList: string[][], 
   refs:React.MutableRefObject<HTMLSpanElement[]>, setTestWPM: React.Dispatch<React.SetStateAction<number>>, setTestCC: React.Dispatch<React.SetStateAction<number>>, 
   setTestWC: React.Dispatch<React.SetStateAction<number>>, setTestAcc: React.Dispatch<React.SetStateAction<number>>,
@@ -211,14 +213,16 @@ function Char({word = "", state = ""}) {
 }
 
 function Word({word = [""], states = [""]}) {
-  const newList = word.map((item, index) => <Char word = {item} state = {states[index]} />)
+  const newList = word.map((item, index) => <Char key = {uuidv4()} word = {item} state = {states[index]} />)
   return newList;
 }
 
 
-function WordList({wordList = [[""]], states = [[""]], refs = useRef<HTMLSpanElement[]>([])}) {
+function WordList({wordList = [[""]], states = [[""]], refs}: {
+  wordList: string[][], states: string[][], refs:React.MutableRefObject<HTMLSpanElement[]>
+}) {
   const refHolder:(HTMLSpanElement | null)[] = refs.current;
-  const newList = wordList.map((item, index) => <span  className='wordBorder' ref = {el => refHolder[index] = el} ><Word word = {item} states = {states[index]}/></span>)
+  const newList = wordList.map((item, index) => <span key = {uuidv4()} className='wordBorder' ref = {el => refHolder[index] = el} ><Word word = {item} states = {states[index]}/></span>)
   return newList;
 }
 
