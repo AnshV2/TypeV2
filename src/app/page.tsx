@@ -78,7 +78,7 @@ export default function App() {
         </SignedIn>
         <SignedOut>
           {/* Signed out users get sign in button */}
-          <Link href = "/signin"><div className = "signin"> Sign in </div></Link>
+          <a href = "/signin"><div className = "signin"> Sign in </div></a>
         </SignedOut>
       </div>
       <img src = {chigiri} className='chigiri'></img>
