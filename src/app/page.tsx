@@ -1,7 +1,6 @@
 'use client'
 
 import { unstable_noStore as noStore } from "next/cache";
-import Link from "next/link";
 
 import { useRouter } from 'next/navigation'
 
@@ -57,7 +56,6 @@ function generate(fillerArr: string[][], fillerwords: string[][]) {
 
 
 export default function App() {
-  noStore();
   const router = useRouter()
 
   const fillerArr: string[][] = [];

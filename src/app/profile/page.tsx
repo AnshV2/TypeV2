@@ -7,7 +7,6 @@ import { api } from "~/trpc/react";
 import {
   useUser,
 } from "@clerk/nextjs";
-import Link from "next/link"; 
 import { v4 as uuidv4 } from 'uuid';
 uuidv4();
 
