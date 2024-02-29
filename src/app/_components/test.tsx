@@ -24,7 +24,7 @@ function InputBox({states = [[""]], setStateArray, setWordList, wordList = [[""]
   const finalTime = 30;
   const[running, upRunning] = useState(false)
   const[wpm, upWpm] = useState(0);
-  let barRef = useRef<HTMLInputElement>();
+  const barRef = useRef<HTMLInputElement>();
   const user = useUser()
   const func = api.post.postTest.useMutation().mutate;
 
@@ -32,7 +32,7 @@ function InputBox({states = [[""]], setStateArray, setWordList, wordList = [[""]
     let fillerCor = 0;
     let fillerIncor = 0;
     for (let i = 0; i < states.length; i++) {
-      let stateHolder = states[i]?? "";
+      const stateHolder = states[i]?? "";
       for (let j = 0; j < stateHolder.length; j++) {
         if (stateHolder[j] === "CharCorrect") {
           fillerCor++;
@@ -49,7 +49,7 @@ function InputBox({states = [[""]], setStateArray, setWordList, wordList = [[""]
     let fillerCor = 0;
     let fillerIncor = 0;
     for (let i = 0; i < states.length; i++) {
-      let stateHolder = states[i]?? "";
+      const stateHolder = states[i]?? "";
       for (let j = 0; j < stateHolder.length; j++) {
         if (stateHolder[j] === "CharCorrect") {
           fillerCor++;
@@ -72,11 +72,11 @@ function InputBox({states = [[""]], setStateArray, setWordList, wordList = [[""]
       upRunning(false)
       if (barRef.current != undefined) {barRef.current.readOnly = true}
       updateWpm()
-      let stats = getWPM()
+      const stats = getWPM()
       setTestCC(stats.cor)
       setTestWC(stats.incor)
       setTestWPM(stats.WPM)
-      let acc = Math.round(stats.cor / (stats.cor + stats.incor) * 100)
+      const acc = Math.round(stats.cor / (stats.cor + stats.incor) * 100)
       console.log(acc)
       setTestAcc(acc)
       if (user.isSignedIn && user.user?.id != undefined) {
@@ -104,7 +104,7 @@ function InputBox({states = [[""]], setStateArray, setWordList, wordList = [[""]
   function typed(event: { target: { value: string | any[]; }; }) {
     let fillthing = "";
     for (let i = 0; i < wordList.length; i++) {
-      let wordListHolder = wordList[i]?? [];
+      const wordListHolder = wordList[i]?? [];
       for (let j = 0; j < wordListHolder.length; j++) {
         fillthing += (wordListHolder[j]);
       }
@@ -113,7 +113,7 @@ function InputBox({states = [[""]], setStateArray, setWordList, wordList = [[""]
       setTimeout(() => upTime(prev => prev - 1), 1000)
       upRunning(true)
     }
-    let letter = (event.target.value[event.target.value.length - 1]);
+    const letter = (event.target.value[event.target.value.length - 1]);
     if (letter == " ") {
       if (event.target.value.length == 1) {
         event.target.value = "";
@@ -216,7 +216,7 @@ function Word({word = [""], states = [""]}) {
 
 
 function WordList({wordList = [[""]], states = [[""]], refs = useRef<HTMLSpanElement[]>([])}) {
-  let refHolder:(HTMLSpanElement | null)[] = refs.current;
+  const refHolder:(HTMLSpanElement | null)[] = refs.current;
   const newList = wordList.map((item, index) => <span  className='wordBorder' ref = {el => refHolder[index] = el} ><Word word = {item} states = {states[index]}/></span>)
   return newList;
 }
@@ -224,8 +224,7 @@ function WordList({wordList = [[""]], states = [[""]], refs = useRef<HTMLSpanEle
 
 
 function generate(fillerArr: string[][], fillerwords: string[][]) {
-  let wordList: string[];
-  wordList = []
+  const wordList: string[] = [];
   fillerArr.length = 0;
   fillerwords.length = 0;
   for (let i = 0; i < 150; i++) {
@@ -234,18 +233,18 @@ function generate(fillerArr: string[][], fillerwords: string[][]) {
     wordList.push(simple[rand] + " ")
   }
   for (let i = 0; i < wordList.length; i++) {
-    let filler = [];
-    let word = wordList[i]?? ""
+    const filler = [];
+    const word = wordList[i]?? ""
     for (let j = 0; j < word.length; j++) {
       filler.push("CharStart");
     }
     fillerArr.push(filler);
   }
   for (let i = 0; i < wordList.length; i++) {
-    let fillerWordsTwo = []
-    let word = wordList[i]?? ""
+    const fillerWordsTwo = []
+    const word = wordList[i]?? ""
     for (let j = 0; j < word.length; j++) {
-      let char = word[j] ?? ""
+      const char = word[j] ?? ""
       fillerWordsTwo.push(char)
     }
     fillerwords.push(fillerWordsTwo);
