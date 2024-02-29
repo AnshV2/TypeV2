@@ -70,16 +70,10 @@ export default function App() {
     <div className = 'App' suppressHydrationWarning={true}>
       <div className = "about">About</div>
       <div className = "user">
-        <SignedIn>
-          {/* Mount the UserButton component */}
-          <div className = "signin" onClick={() => {
+        {user.isSignedIn && <div className = "signin" onClick={() => {
             router.push('/profile')
-          }}>Profile</div>
-        </SignedIn>
-        <SignedOut>
-          {/* Signed out users get sign in button */}
-          <a href = "/signin"><div className = "signin"> Sign in </div></a>
-        </SignedOut>
+          }}>Profile</div>}
+        {!user.isSignedIn && <a href = "/signin"><div className = "signin"> Sign in </div></a>}
       </div>
       <img src = {chigiri} className='chigiri'></img>
       <Test  fillerArr = {fillerArr} fillerWords = {fillerWordList} />
