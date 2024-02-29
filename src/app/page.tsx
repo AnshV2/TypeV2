@@ -23,6 +23,8 @@ const chigiri = '/chigiri.png'
 const arrow = '/arrow.png'
 
 import dynamic from 'next/dynamic'
+import { prefetchDNS } from "react-dom";
+import Link from "next/link";
 const Test = dynamic(() => import("./_components/test"), { ssr: false })
 
 
@@ -69,9 +71,9 @@ export default function App() {
       <div className = "about">About</div>
       <div className = "user">
         {user.isSignedIn && <div className = "signin" onClick={() => {
-            router.push('/profile')
+            router.push('/profile');
           }}>Profile</div>}
-        {!user.isSignedIn && <a href = "/signin"><div className = "signin"> Sign in </div></a>}
+        {!user.isSignedIn && <Link href="/signin" prefetch = {false}><div className = "signin"> Sign in </div></Link>}
       </div>
       <img src = {chigiri} className='chigiri'></img>
       <Test  fillerArr = {fillerArr} fillerWords = {fillerWordList} />
