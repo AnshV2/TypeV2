@@ -15,7 +15,7 @@ uuidv4();
 
 export default function Signin() {
   const user = useUser()
-  const test = api.post.getTest.useQuery({user: user.user?.id?? ""}).data
+  const test = api.post.getTest.useQuery().data
   const router = useRouter()
   const { signOut } = useClerk();
 

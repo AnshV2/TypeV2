@@ -25,13 +25,12 @@ export const postRouter = createTRPCRouter({
     }),
 
     getTest: privateProcedure
-    .input(z.object({user: z.string()}))
-    .query(async ({ctx, input}) => {
+    .query(async ({ctx}) => {
       const tests = (await ctx.db.test.findMany({orderBy: [{
         time: 'asc'
       }], 
       take: 100,
-      where: {user: {equals: input.user}}}))
+      where: {user: {equals: ctx.session}}}))
       return tests;
     })
 });
