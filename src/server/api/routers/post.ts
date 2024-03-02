@@ -10,7 +10,7 @@ export const postRouter = createTRPCRouter({
         greeting: `Hello ${input.text}`,
       };
     }),
-    postTest: privateProcedure
+    postTest: publicProcedure
     .input(z.object({user: z.string(), wpm: z.number(), wc: z.number(), cc: z.number()}))
     .mutation(async ({ctx, input}) => {
       const test = await ctx.db.test.create({
