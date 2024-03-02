@@ -70,10 +70,8 @@ export default function App() {
     <div className = 'App' suppressHydrationWarning={true}>
       <div className = "about">About</div>
       <div className = "user">
-        {user.isSignedIn && <div className = "signin" onClick={() => {
-            router.push('/profile');
-          }}>Profile</div>}
-        {!user.isSignedIn && <Link href="/signin" prefetch = {false}><div className = "signin"> Sign in </div></Link>}
+        {user.isSignedIn && <Link href = "/profile" prefetch = {false}><div className = "signin" >Profile</div></Link>}
+        {!user.isSignedIn && <Link href="/signin" prefetch = {false}><div className = "signin"> Log In </div></Link>}
       </div>
       <img src = {chigiri} className='chigiri'></img>
       <Test  fillerArr = {fillerArr} fillerWords = {fillerWordList} />
