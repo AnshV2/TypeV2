@@ -27,7 +27,7 @@ export const postRouter = createTRPCRouter({
     getTest: privateProcedure
     .query(async ({ctx}) => {
       const tests = (await ctx.db.test.findMany({orderBy: [{
-        time: 'asc'
+        time: 'desc'
       }], 
       take: 100,
       where: {user: {equals: ctx.session}}}))

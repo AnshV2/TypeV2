@@ -27,6 +27,11 @@ export default function Signin() {
   if (test) {
     let index = 0;
     testCount = test?.length
+    if (test?.length == 0) {
+      avgWPM = 0;
+      avgACC = 0;
+    }
+    else {
     for (let i = 0; i < test?.length; i++){
       const one = test[i]?.wpm
       const two = test[index]?.wpm
@@ -42,6 +47,7 @@ export default function Signin() {
     }
     avgWPM = Math.round(avgWPM / testCount);
     avgACC = Math.round(avgACC / testCount);
+    }
     bestTest = test[index]?? {wpm: 0, cc: 0, wc: 0}
   }
 
@@ -68,7 +74,7 @@ export default function Signin() {
           <div className="typeFour">WC</div>
           <div className="typeFive">DATE</div>
         </div>
-        {test?.map((e) => {return (
+        {(testCount != 0) && test?.map((e) => {return (
         <div className="testRow" key = {uuidv4()}>
           <div className="typeFiller">{e.wpm} wpm</div>
           <div className="typeFillerTwo"> {Math.round(e.cc / (e.cc + e.wc) * 100)}%</div>
@@ -77,6 +83,7 @@ export default function Signin() {
           <div className="typeFiller"> {e.time.getFullYear()} - {e.time.getMonth() + 1} - {e.time.getDate()}</div>
         </div>
         )})}
+        {(testCount == 0) && <div className="noTests">No Tests Taken</div>}
       </div>
       <div className="pb">Personal Best</div>
       <div className = "pbTest">
