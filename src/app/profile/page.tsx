@@ -32,7 +32,7 @@ export default function Signin() {
       const two = test[index]?.wpm
       const cc = test[i]?.cc
       const wc = test[i]?.wc
-      avgACC += Math.round(cc??0 / (cc??0 + (wc??0)) * 100)
+      if (cc && wc) {avgACC += Math.round(cc/ (cc + (wc)) * 100);}
       avgWPM += one?? 0;
       if (one && two) {
         if ( one > two) {
@@ -74,7 +74,7 @@ export default function Signin() {
           <div className="typeFillerTwo"> {Math.round(e.cc / (e.cc + e.wc) * 100)}%</div>
           <div className="typeFiller"> {e.cc}</div>
           <div className="typeFillerTwo"> {e.wc}</div>
-          <div className="typeFiller"> {e.time.getFullYear()} - {e.time.getMonth()} - {e.time.getDay()}</div>
+          <div className="typeFiller"> {e.time.getFullYear()} - {e.time.getMonth() + 1} - {e.time.getDate()}</div>
         </div>
         )})}
       </div>
