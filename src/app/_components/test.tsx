@@ -12,12 +12,13 @@ import {
 } from "@clerk/nextjs";
 import { v4 as uuidv4 } from 'uuid';
 uuidv4();
+import CheckIcon from '@mui/icons-material/Check';
 
 
-function InputBox({states = [[""]], setStateArray, setWordList, wordList = [[""]], refs, setTestWPM, setTestCC, setTestWC, setTestAcc}: {
+function InputBox({states = [[""]], setStateArray, setWordList, wordList = [[""]], refs, setTestWPM, setTestCC, setTestWC, setTestAcc, training}: {
   states: string[][], setStateArray: React.Dispatch<React.SetStateAction<string[][]>>, setWordList: React.Dispatch<React.SetStateAction<string[][]>>, wordList: string[][], 
   refs:React.MutableRefObject<HTMLSpanElement[]>, setTestWPM: React.Dispatch<React.SetStateAction<number>>, setTestCC: React.Dispatch<React.SetStateAction<number>>, 
-  setTestWC: React.Dispatch<React.SetStateAction<number>>, setTestAcc: React.Dispatch<React.SetStateAction<number>>,
+  setTestWC: React.Dispatch<React.SetStateAction<number>>, setTestAcc: React.Dispatch<React.SetStateAction<number>>, training:boolean,
 }) {
   const [word, upWord] = useState(0);
   const [char, upChar] = useState(0);
@@ -80,7 +81,7 @@ function InputBox({states = [[""]], setStateArray, setWordList, wordList = [[""]
       setTestWPM(stats.WPM)
       const acc = Math.round(stats.cor / (stats.cor + stats.incor) * 100)
       setTestAcc(acc)
-      if (user.isSignedIn && user.user?.id != undefined) {
+      if (user.isSignedIn && !training && user.user?.id != undefined) { 
         func({user: user.user.id , wpm: stats.WPM, wc: stats.incor, cc: stats.cor})
       }
     }
@@ -271,6 +272,7 @@ export default function Test({fillerArr = [[""]], fillerWords = [[""]]}) {
   const [testCC, setTestCC] = useState(0);
   const [testWC, setTestWC] = useState(0);
   const [testAcc, setTestAcc] = useState(0);
+  const [training, setTraining] = useState(false);
 
   return (
     <div className = "test">
@@ -280,7 +282,7 @@ export default function Test({fillerArr = [[""]], fillerWords = [[""]]}) {
         </div>
       </div>
       <InputBox wordList = {fillerwordList} states = {stateArray} setStateArray = {setStateArray} setWordList={setWordList} refs = {refs} setTestWPM = {setTestWPM} 
-                setTestAcc={setTestAcc} setTestCC={setTestCC} setTestWC={setTestWC}/>
+                setTestAcc={setTestAcc} setTestCC={setTestCC} setTestWC={setTestWC} training = {training}/>
       <div className="userService">
         <div className = "session">
 
@@ -292,7 +294,10 @@ export default function Test({fillerArr = [[""]], fillerWords = [[""]]}) {
           <div className = "recentACC">{testAcc}% ACC</div>
         </div>
         <div className = "settings">
-
+          <div className = "settingItem">
+            <div className="settingBox " onClick={() => {setTraining(!training)}}>{training && <CheckIcon htmlColor="#27D796"/>}</div>
+            <div>Training Mode</div>
+          </div>
         </div>
       </div>
     </div>
