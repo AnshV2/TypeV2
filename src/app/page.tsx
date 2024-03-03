@@ -68,7 +68,7 @@ export default function App() {
 
   return (
     <div className = 'App' suppressHydrationWarning={true}>
-      <div className = "about">About</div>
+      <Link className = "about" href = "/about" prefetch = {false}><div>About</div></Link>
       <div>
         {user.isSignedIn && <Link className = "signin" href = "/profile" prefetch = {false}><div>Profile</div></Link>}
         {!user.isSignedIn && <Link href="/signin" prefetch = {false}><div className = "signin"> Log In </div></Link>}
