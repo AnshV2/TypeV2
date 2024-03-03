@@ -721,3 +721,63 @@ body {
   top:1vh;
   height:8.5vw;
 }
+
+.testTwo{
+  position:absolute;
+  left:20vw;
+  top:7vh;
+  --tw-text-opacity: 1;
+  color: white;
+  font-size: 1.5rem/* 24px */;
+  line-height: 2rem/* 32px */;
+  font-weight: 500;
+  text-decoration: none;
+  color:white;
+  border:solid;
+  border-color:rgba(255, 255, 255, 0.562);
+  border-width: 2px;
+  border-radius: 5px;
+  padding:5px;
+  padding-left:7px;
+  padding-right:7px;
+}
+
+.testTwo:hover{
+  background-color:#435585;
+  cursor:pointer;
+}
+
+
+
+.icons {
+  position:absolute;
+  left:66vw;
+  top:3.6vh;
+  display: flex;
+  justify-content: center;
+  list-style-type: none;
+}
+
+.listf{
+  justify-content: center;
+  color: #1A1A1D;
+  font-size: 4vw;
+  height: 60px;
+  background: none;
+  line-height: 60px;
+  border-radius: 50%;
+  margin: 0 1vw;
+  cursor: pointer;
+  transition: .45s;
+}
+
+.listf:nth-child(1):hover{
+  color: #C13584;
+}
+.listf:nth-child(2):hover{
+  color: 	#2867B2;
+}
+
+.fillerAbout{
+  height:10vh;
+}

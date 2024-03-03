@@ -1,9 +1,20 @@
 'use client'
+
+import Link from "next/link";
 const chigiri = '/chigiri.png'
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {faGithub, faInstagram} from '@fortawesome/free-brands-svg-icons'
+
 
 export default function About(){
   return (
     <>
+        <Link className = "testTwo" href = "/" prefetch = {false}><div>Test</div></Link>
+        <ul className="icons">
+                        <a href="https://www.instagram.com/aneeshyboneechyelectric/" className="listf"><li><FontAwesomeIcon icon={faInstagram} /></li></a>
+                        <a href="https://github.com/AnshV2" className="listf"><li><FontAwesomeIcon icon={faGithub} /></li></a>
+        </ul>
         <img src = {chigiri} className='chigiriTwo'></img>
         <div className="aboutWrapper">
         <div className="aboutTextHeader">Hi there fellow typing enthusiast! Hope you are enjoying my typetest.</div>
@@ -52,7 +63,10 @@ the olympic athlete knows about this feeling and they push through! Even session
 through that terrible feeling you will find that the third of the time you feel amazing will feel like no other experience. I find
 it helpful to know that typing is something where there legitimately no inherit limit in the body. Anyone is capable of reaching
 blazingly high speeds. I hope this test I have built can assist you in your progression just as many tests have helped me.  </div>
+
+        <div className="fillerAbout"></div>
 </div>
+
     </>
   );
 }
