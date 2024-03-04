@@ -14,6 +14,9 @@ a {
 
 *{
   font-family: 'Futura Std', sans-serif;
+  scrollbar-width: thin;          /* "auto" or "thin" */
+  scrollbar-color: var(--foreground) var(--background);   /* scroll thumb and track */ 
+
 }
 
 
@@ -21,6 +24,7 @@ body {
   overflow-x:hidden;
   background-color: var(--background);
   margin:0;
+
 }
 
 .App {
@@ -28,7 +32,7 @@ body {
   justify-content: center;
   /*background-color:#191919; */
   background-color: var(--background);
-  height: 100vh;
+  height: 110vh;
   width:100vw;
 }
 

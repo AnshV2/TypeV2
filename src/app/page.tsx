@@ -1,30 +1,15 @@
 'use client'
 
-import { unstable_noStore as noStore } from "next/cache";
-
 import { useRouter } from 'next/navigation'
-
-import { api } from "~/trpc/react";
-import styles from "./index.module.css";
-
-import {
-  ClerkProvider,
-  SignedIn,
-  SignedOut,
-  SignInButton,
-  UserButton,
-  SignIn, 
-  useUser,
-} from "@clerk/nextjs";
-
-
+import { useUser, } from "@clerk/nextjs";
 import {simple} from './WordBank.js'
 const chigiri = '/chigiri.png'
-const arrow = '/arrow.png'
-
 import dynamic from 'next/dynamic'
-import { prefetchDNS } from "react-dom";
 import Link from "next/link";
+import { useAutoAnimate } from '@formkit/auto-animate/react'
+import { motion } from "framer-motion"
+import {useRef} from "react"
+
 const Test = dynamic(() => import("./_components/test"), { ssr: false })
 
 
@@ -58,7 +43,6 @@ function generate(fillerArr: string[][], fillerwords: string[][]) {
 
 
 export default function App() {
-  const router = useRouter()
 
   const fillerArr: string[][] = [];
   const fillerWordList : string[][] = [];
@@ -67,14 +51,26 @@ export default function App() {
   const user = useUser()
 
   return (
-    <div className = 'App' suppressHydrationWarning={true}>
-      <Link className = "about" href = "/about" prefetch = {false}><div>About</div></Link>
-      <div>
-        {user.isSignedIn && <Link className = "signin" href = "/profile" prefetch = {false}><div>Profile</div></Link>}
-        {!user.isSignedIn && <Link href="/signin" prefetch = {false}><div className = "signin"> Log In </div></Link>}
-      </div>
+    <>
       <img src = {chigiri} className='chigiri'></img>
-      <Test  fillerArr = {fillerArr} fillerWords = {fillerWordList} />
-    </div>
+
+      {user.isLoaded &&
+        <motion.div initial={{ opacity: 0, translateY: 50, x: 0 }} animate={{ opacity: 1, translateY: 0, x: 0, transition: { duration: 0.5 } }}>
+          <Link className = "about" href = "/about" prefetch = {false}><div>About</div></Link>
+          <div>
+            {user.isSignedIn && <Link className = "signin" href = "/profile" prefetch = {false}><div>Profile</div></Link>}
+            {!user.isSignedIn && <Link href="/signin" prefetch = {false}><div className = "signin"> Log In </div></Link>}
+          </div>
+          </motion.div>
+      }
+
+      <div className = 'App' suppressHydrationWarning={true} >
+        <Test fillerArr={fillerArr} fillerWords={fillerWordList}/>
+      </div>
+    </>
   );
 }
+
+//<img src = {chigiri} className='chigiri'></img>
+//initial={{ opacity: 0, translateY: 20, x: 0 }} animate={{ opacity: 1, translateY: 0, x: 0, transition: { duration: 0.5 } }}
+

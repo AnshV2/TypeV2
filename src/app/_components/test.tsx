@@ -13,6 +13,7 @@ import {
 import { v4 as uuidv4 } from 'uuid';
 uuidv4();
 import CheckIcon from '@mui/icons-material/Check';
+import { motion } from "framer-motion"
 
 
 function InputBox({states = [[""]], setStateArray, setWordList, wordList = [[""]], refs, setTestWPM, setTestCC, setTestWC, setTestAcc, training}: {
@@ -263,7 +264,7 @@ function reset(setStateArray: Function, setWordList: Function) {
   setWordList(fillerWords);
 }
 
-export default function Test({fillerArr = [[""]], fillerWords = [[""]]}) {
+export default function Test({fillerArr = [[""]], fillerWords = [[""]]}: {fillerArr: string[][], fillerWords: string[][]}) {
   const [stateArray, setStateArray] = useState(fillerArr);
   const [fillerwordList, setWordList] = useState(fillerWords);
   const refs = useRef<HTMLSpanElement[]>([]);
@@ -275,7 +276,8 @@ export default function Test({fillerArr = [[""]], fillerWords = [[""]]}) {
   const [training, setTraining] = useState(false);
 
   return (
-    <div className = "test">
+    <motion.div className = "test" initial={{ opacity: 0, translateY: 50, }} 
+    animate={{ opacity: 1, translateY: 0, transition: { duration: 0.5} }}>
       <div className = "textBorderOutline">
         <div className= 'textBorder'>
           <WordList wordList = {fillerwordList} states = {stateArray} refs = {refs} />
@@ -300,6 +302,7 @@ export default function Test({fillerArr = [[""]], fillerWords = [[""]]}) {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
+
