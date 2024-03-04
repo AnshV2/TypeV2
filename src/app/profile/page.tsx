@@ -7,8 +7,38 @@ import { api } from "~/trpc/react";
 import {
   useUser,
 } from "@clerk/nextjs";
+import { motion } from "framer-motion"
 import { v4 as uuidv4 } from 'uuid';
 uuidv4();
+
+
+
+const Feed = () => {
+  const {data, isLoading: postsLoading} = api.post.getTest.useQuery()
+
+  if (postsLoading) {
+    return (
+      <div className="loadContainer">
+        <span className="loader"></span>
+      </div>
+    )
+  }
+  return (
+    <>
+    {(data?.length != 0) && data?.map((e) => {return (
+      <div className="testRow" key = {uuidv4()}>
+        <div className="typeFiller">{e.wpm} wpm</div>
+        <div className="typeFillerTwo"> {Math.round(e.cc / (e.cc + e.wc) * 100)}%</div>
+        <div className="typeFiller"> {e.cc}</div>
+        <div className="typeFillerTwo"> {e.wc}</div>
+        <div className="typeFiller"> {e.time.getFullYear()} - {e.time.getMonth() + 1} - {e.time.getDate()}</div>
+      </div>
+      )})}
+      {(data?.length == 0) && <div className="noTests">No Tests Taken</div>}
+      </>
+  )
+}
+
 
 
 
@@ -18,7 +48,6 @@ export default function Signin() {
   const test = api.post.getTest.useQuery().data
   const router = useRouter()
   const { signOut } = useClerk();
-
   let bestTest = {wpm: 0, cc: 0, wc: 0}
   let avgWPM = 0
   let avgACC = 0
@@ -74,16 +103,7 @@ export default function Signin() {
           <div className="typeFour">WC</div>
           <div className="typeFive">DATE</div>
         </div>
-        {(testCount != 0) && test?.map((e) => {return (
-        <div className="testRow" key = {uuidv4()}>
-          <div className="typeFiller">{e.wpm} wpm</div>
-          <div className="typeFillerTwo"> {Math.round(e.cc / (e.cc + e.wc) * 100)}%</div>
-          <div className="typeFiller"> {e.cc}</div>
-          <div className="typeFillerTwo"> {e.wc}</div>
-          <div className="typeFiller"> {e.time.getFullYear()} - {e.time.getMonth() + 1} - {e.time.getDate()}</div>
-        </div>
-        )})}
-        {(testCount == 0) && <div className="noTests">No Tests Taken</div>}
+        <Feed />
       </div>
       <div className="pb">Personal Best</div>
       <div className = "pbTest">
@@ -94,7 +114,9 @@ export default function Signin() {
       </div>
 
       <div className="profileContainer">
-        <div className="username">{user.user?.firstName}</div>
+        <motion.div initial={{ opacity: 0, translateY: 50, x: 0 }} animate={{ opacity: 1, translateY: 0, x: 0, transition: { duration: 0.5 } }}>
+          <div className="username">{user.user?.firstName}</div>
+        </motion.div>
         <div className="testRoute" onClick={() => router.push('/')}>Test</div>
         <div className="about2" onClick={() => router.push('/about')}>About</div>
         <div className="signOut" onClick={() => signOut(() => router.push("/"))}>Log Out</div>
