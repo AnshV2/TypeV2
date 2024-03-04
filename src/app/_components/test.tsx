@@ -173,6 +173,36 @@ function InputBox({states = [[""]], setStateArray, setWordList, wordList = [[""]
   }
 
   useEffect(() => {
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      // Check if Ctrl key is pressed and Space key is pressed
+      if (event.ctrlKey && event.key === 'r') {
+        event.preventDefault(); // Prevent default browser behavior
+        // Your custom logic here
+        for (let i = 0 ; i < states.length; i++) {
+          (refs.current[i] as HTMLSpanElement).className = "wordBorder";
+        }
+        (barRef.current as HTMLInputElement).value = "";
+        upChar(0);
+        upWord(0);
+        upRunning(false)
+        upTime(finalTime)
+        upLast("");
+        reset(setStateArray, setWordList);
+        (barRef.current as HTMLInputElement).readOnly = false;
+        (barRef.current as HTMLInputElement).focus();
+        upWpm(0);
+      }
+    };
+
+    // Attach the event listener when the component mounts
+    window.addEventListener('keydown', handleKeyDown);
+
+    // Remove the event listener when the component unmounts
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+
     (barRef.current as HTMLInputElement).focus();
     (refs.current[0] as HTMLSpanElement).className = "wordCurrent";
   }, [])
