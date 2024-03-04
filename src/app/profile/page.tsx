@@ -66,7 +66,9 @@ export default function Signin() {
       const two = test[index]?.wpm
       const cc = test[i]?.cc
       const wc = test[i]?.wc
-      if (cc && wc) {avgACC += Math.round(cc/ (cc + (wc)) * 100);}
+      console.log(cc)
+      console.log(wc)
+      if (cc != undefined && wc != undefined) {avgACC += Math.round((cc/ (cc + wc)) * 100);}
       avgWPM += one?? 0;
       if (one && two) {
         if ( one > two) {
