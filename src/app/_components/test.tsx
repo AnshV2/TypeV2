@@ -174,7 +174,11 @@ function InputBox({states = [[""]], setStateArray, setWordList, wordList = [[""]
 
   useEffect(() => {
 
+    (barRef.current as HTMLInputElement).focus();
+    (refs.current[0] as HTMLSpanElement).className = "wordCurrent";
+
     const handleKeyDown = (event: KeyboardEvent) => {
+
       // Check if Ctrl key is pressed and Space key is pressed
       if (event.ctrlKey && event.key === 'r') {
         event.preventDefault(); // Prevent default browser behavior
@@ -202,9 +206,6 @@ function InputBox({states = [[""]], setStateArray, setWordList, wordList = [[""]
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-
-    (barRef.current as HTMLInputElement).focus();
-    (refs.current[0] as HTMLSpanElement).className = "wordCurrent";
   }, [])
   return (
     <div className = "inputStuff"> 
