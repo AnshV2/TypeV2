@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 const chigiri = '/chigiri.png'
-
+import { motion } from "framer-motion"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faGithub, faInstagram} from '@fortawesome/free-brands-svg-icons'
 
@@ -16,9 +16,9 @@ export default function About(){
                         <a href="https://github.com/AnshV2" className="listf"><li><FontAwesomeIcon icon={faGithub} /></li></a>
         </ul>
         <img src = {chigiri} className='chigiriTwo'></img>
+        <motion.div initial={{ opacity: 0, translateY: 50, x: 0 }} animate={{ opacity: 1, translateY: 0, x: 0, transition: { duration: 0.5 } }}>
         <div className="aboutWrapper">
-        <div className="aboutTextHeader">Hi there fellow typing enthusiast! Hope you are enjoying my typetest.</div>
-        <br></br>
+        <div className="aboutTextHeader">Hi there fellow typing enthusiast! Hope you are enjoying my Typetest</div>
         <br></br>
         <div className="aboutText">My objective when building this typetest was to produce a test meant for practicing and improving infinitely. I designed the test
 specifically to be minimilistic and as easy on the eyes as possible. I researched least strainful colors and designs and tried to
@@ -27,10 +27,11 @@ without experiencing fatigue. I want you to enjoy improvement as much as possibl
         <br></br>
         <br></br>
         <div className="aboutTextHeader">Test Measurements:</div>
-        <div className="aboutText">Correct Characters - Number of characters in correctly typed words.
-Incorrect Characters - Number of characters in words with at least one incorrect character.
-Words per Minute (WPM) - Correct characters, divided by 5, and divided by the test duration in minutes.
-Accuracy - Number of characters in correctly typed words, divided by the number of characters in all words, as a percentage.</div>
+        <div className="aboutText">Correct Characters - Number of characters in correctly typed words.</div>
+        <div className="aboutText">Incorrect Characters - Number of characters in words with at least one incorrect character.</div>
+        <div className="aboutText">Words per Minute (WPM) - Correct characters, divided by 5, and divided by the test duration in minutes.</div>
+        <div className="aboutText">Accuracy - Number of characters in correctly typed words, divided by the number of characters in all words, as a percentage.</div>
+        <div></div>
         <br></br>
         <br></br>
         <div className="aboutTextHeader">User Experience Choices:</div>
@@ -66,7 +67,7 @@ blazingly high speeds. I hope this test I have built can assist you in your prog
 
         <div className="fillerAbout"></div>
 </div>
-
+</motion.div>
     </>
   );
 }
