@@ -265,7 +265,7 @@ function generate(fillerArr: string[][], fillerwords: string[][]) {
   fillerwords.length = 0;
   for (let i = 0; i < 150; i++) {
     let rand = Math.random();
-    rand = Math.floor(rand * 1000);
+    rand = Math.floor(rand * 299);
     wordList.push(simple[rand] + " ")
   }
   for (let i = 0; i < wordList.length; i++) {
