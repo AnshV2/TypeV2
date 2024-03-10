@@ -16,10 +16,11 @@ import CheckIcon from '@mui/icons-material/Check';
 import { motion } from "framer-motion"
 
 
-function InputBox({states = [[""]], setStateArray, setWordList, wordList = [[""]], refs, setTestWPM, setTestCC, setTestWC, setTestAcc, training}: {
+function InputBox({states = [[""]], setStateArray, setWordList, wordList = [[""]], refs, setTestWPM, setTestCC, setTestWC, setTestAcc, training, setWidth, setHeight, setLeft}: {
   states: string[][], setStateArray: React.Dispatch<React.SetStateAction<string[][]>>, setWordList: React.Dispatch<React.SetStateAction<string[][]>>, wordList: string[][], 
   refs:React.MutableRefObject<HTMLSpanElement[]>, setTestWPM: React.Dispatch<React.SetStateAction<number>>, setTestCC: React.Dispatch<React.SetStateAction<number>>, 
   setTestWC: React.Dispatch<React.SetStateAction<number>>, setTestAcc: React.Dispatch<React.SetStateAction<number>>, training:boolean,
+  setWidth: React.Dispatch<React.SetStateAction<number>>, setHeight: React.Dispatch<React.SetStateAction<number>>, setLeft: React.Dispatch<React.SetStateAction<number>>, 
 }) {
   const [word, upWord] = useState(0);
   const [char, upChar] = useState(0);
@@ -148,7 +149,17 @@ function InputBox({states = [[""]], setStateArray, setWordList, wordList = [[""]
         upChar(0);
         upLast("");
         event.target.value = "";
-        (refs.current[word + 1] as HTMLSpanElement).className = "wordCurrent";
+        //(refs.current[word + 1] as HTMLSpanElement).className = "wordCurrent";
+        setWidth((refs.current[word + 1] as HTMLSpanElement).clientWidth)
+        setHeight((refs.current[word + 1] as HTMLSpanElement).clientHeight)
+        let parent: number | undefined = 0;
+        let child = (refs.current[word + 1] as HTMLSpanElement).getBoundingClientRect().left;
+        if ((refs.current[word + 1] as HTMLSpanElement).parentElement != undefined) {
+          parent = (refs.current[word + 1] as HTMLSpanElement).parentElement?.getBoundingClientRect().left;
+        }
+        let left = child;
+        if (parent != undefined) {left = child - parent}
+        setLeft(left)
       }
     }
     else {
@@ -175,8 +186,17 @@ function InputBox({states = [[""]], setStateArray, setWordList, wordList = [[""]
   useEffect(() => {
 
     (barRef.current as HTMLInputElement).focus();
-    (refs.current[0] as HTMLSpanElement).className = "wordCurrent";
-
+    //(refs.current[0] as HTMLSpanElement).className = "wordCurrent";
+    setWidth((refs.current[0] as HTMLSpanElement).clientWidth)
+    setHeight((refs.current[0] as HTMLSpanElement).clientHeight)
+    let parent: number | undefined = 0;
+    let child = (refs.current[0] as HTMLSpanElement).getBoundingClientRect().left;
+    if ((refs.current[0] as HTMLSpanElement).parentElement != undefined && (refs.current[0] as HTMLSpanElement).parentElement?.getBoundingClientRect().left) {
+      parent = (refs.current[0] as HTMLSpanElement).parentElement?.getBoundingClientRect().left;
+    }
+    let left = child;
+    if (parent != undefined) {left = child - parent}
+    setLeft(left)
     const handleKeyDown = (event: KeyboardEvent) => {
 
       // Check if Ctrl key is pressed and Space key is pressed
@@ -196,6 +216,16 @@ function InputBox({states = [[""]], setStateArray, setWordList, wordList = [[""]
         (barRef.current as HTMLInputElement).readOnly = false;
         (barRef.current as HTMLInputElement).focus();
         upWpm(0);
+        setWidth(0)
+        setHeight((refs.current[0] as HTMLSpanElement).clientHeight)
+        let parent: number | undefined = 0;
+        let child = (refs.current[0] as HTMLSpanElement).getBoundingClientRect().left;
+        if ((refs.current[0] as HTMLSpanElement).parentElement != undefined && (refs.current[0] as HTMLSpanElement).parentElement?.getBoundingClientRect().left) {
+          parent = (refs.current[0] as HTMLSpanElement).parentElement?.getBoundingClientRect().left;
+        }
+        let left = child;
+        if (parent != undefined) {left = child - parent}
+        setLeft(left)
       }
     };
 
@@ -232,12 +262,23 @@ function InputBox({states = [[""]], setStateArray, setWordList, wordList = [[""]
           reset(setStateArray, setWordList);
           (barRef.current as HTMLInputElement).readOnly = false;
           (barRef.current as HTMLInputElement).focus();
+          setWidth(0)
+          setHeight((refs.current[0] as HTMLSpanElement).clientHeight)
+          let parent: number | undefined = 0;
+          let child = (refs.current[0] as HTMLSpanElement).getBoundingClientRect().left;
+          if ((refs.current[0] as HTMLSpanElement).parentElement != undefined && (refs.current[0] as HTMLSpanElement).parentElement?.getBoundingClientRect().left) {
+            parent = (refs.current[0] as HTMLSpanElement).parentElement?.getBoundingClientRect().left;
+          }
+          let left = child;
+          if (parent != undefined) {left = child - parent}
+          setLeft(left)
         }} className='reset'><img src = {arrow} className = 'arrow'></img>
         </button>
       </div>
     </div>
   )
 }
+
 
 function Char({word = "", state = ""}) {
   return <span className = {state} >{word}</span>;
@@ -306,16 +347,21 @@ export default function Test({fillerArr = [[""]], fillerWords = [[""]]}: {filler
   const [testAcc, setTestAcc] = useState(0);
   const [training, setTraining] = useState(false);
 
+  const [currWidth, setWidth] = useState(0);
+  const [currHeight, setHeight] = useState(0);
+  const [currLeft, setLeft] = useState(0);
+
   return (
     <motion.div className = "test" initial={{ opacity: 0, translateY: 50, }} 
     animate={{ opacity: 1, translateY: 0, transition: { duration: 0.5} }}>
       <div className = "textBorderOutline">
         <div className= 'textBorder'>
+          <div className = "wassup" style = {{width: currWidth, height: currHeight, left: currLeft}}></div>
           <WordList wordList = {fillerwordList} states = {stateArray} refs = {refs} />
         </div>
       </div>
       <InputBox wordList = {fillerwordList} states = {stateArray} setStateArray = {setStateArray} setWordList={setWordList} refs = {refs} setTestWPM = {setTestWPM} 
-                setTestAcc={setTestAcc} setTestCC={setTestCC} setTestWC={setTestWC} training = {training}/>
+                setTestAcc={setTestAcc} setTestCC={setTestCC} setTestWC={setTestWC} training = {training} setWidth = {setWidth} setHeight = {setHeight} setLeft = {setLeft}/>
       <div className="userService">
         <div className = "session">
 

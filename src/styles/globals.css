@@ -144,6 +144,7 @@ body {
 }
 
 .wordBorder{
+  z-index:3;
   padding:2px;
 }
 
@@ -874,4 +875,14 @@ body {
   height: 80vh;
   justify-content: center;
   align-items: center;
+}
+
+
+.wassup{
+  z-index: 0;
+  position:absolute;
+  display:flex;
+  background-color: #2E303E;
+  border-radius: 5%;
+  transition: left 0.15s ease;
 }
