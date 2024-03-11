@@ -153,7 +153,7 @@ function InputBox({states = [[""]], setStateArray, setWordList, wordList = [[""]
         setWidth((refs.current[word + 1] as HTMLSpanElement).clientWidth)
         setHeight((refs.current[word + 1] as HTMLSpanElement).clientHeight)
         let parent: number | undefined = 0;
-        let child = (refs.current[word + 1] as HTMLSpanElement).getBoundingClientRect().left;
+        const child = (refs.current[word + 1] as HTMLSpanElement).getBoundingClientRect().left;
         if ((refs.current[word + 1] as HTMLSpanElement).parentElement != undefined) {
           parent = (refs.current[word + 1] as HTMLSpanElement).parentElement?.getBoundingClientRect().left;
         }
@@ -190,7 +190,7 @@ function InputBox({states = [[""]], setStateArray, setWordList, wordList = [[""]
     setWidth((refs.current[0] as HTMLSpanElement).clientWidth)
     setHeight((refs.current[0] as HTMLSpanElement).clientHeight)
     let parent: number | undefined = 0;
-    let child = (refs.current[0] as HTMLSpanElement).getBoundingClientRect().left;
+    const child = (refs.current[0] as HTMLSpanElement).getBoundingClientRect().left;
     if ((refs.current[0] as HTMLSpanElement).parentElement != undefined && (refs.current[0] as HTMLSpanElement).parentElement?.getBoundingClientRect().left) {
       parent = (refs.current[0] as HTMLSpanElement).parentElement?.getBoundingClientRect().left;
     }
@@ -219,7 +219,7 @@ function InputBox({states = [[""]], setStateArray, setWordList, wordList = [[""]
         setWidth(0)
         setHeight((refs.current[0] as HTMLSpanElement).clientHeight)
         let parent: number | undefined = 0;
-        let child = (refs.current[0] as HTMLSpanElement).getBoundingClientRect().left;
+        const child = (refs.current[0] as HTMLSpanElement).getBoundingClientRect().left;
         if ((refs.current[0] as HTMLSpanElement).parentElement != undefined && (refs.current[0] as HTMLSpanElement).parentElement?.getBoundingClientRect().left) {
           parent = (refs.current[0] as HTMLSpanElement).parentElement?.getBoundingClientRect().left;
         }
@@ -265,7 +265,7 @@ function InputBox({states = [[""]], setStateArray, setWordList, wordList = [[""]
           setWidth(0)
           setHeight((refs.current[0] as HTMLSpanElement).clientHeight)
           let parent: number | undefined = 0;
-          let child = (refs.current[0] as HTMLSpanElement).getBoundingClientRect().left;
+          const child = (refs.current[0] as HTMLSpanElement).getBoundingClientRect().left;
           if ((refs.current[0] as HTMLSpanElement).parentElement != undefined && (refs.current[0] as HTMLSpanElement).parentElement?.getBoundingClientRect().left) {
             parent = (refs.current[0] as HTMLSpanElement).parentElement?.getBoundingClientRect().left;
           }
